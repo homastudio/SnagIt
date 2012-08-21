@@ -1,0 +1,49 @@
+﻿@using Orchard.Utility.Extensions;
+
+@{
+    var hasContext = TempData["Contact.Name"] != null;
+    var name = Convert.ToString(TempData["Contact.Name"]);
+    var company = Convert.ToString(TempData["Contact.Company"]);
+    var email = Convert.ToString(TempData["Contact.Email"]);
+    var message = Convert.ToString(TempData["Contact.Message"]);
+    var phone = Convert.ToString(TempData["Contact.Phone"]);
+    var topic = Convert.ToString(TempData["Contact.Topic"]);
+    var currentWebsite = Convert.ToString(TempData["Contact.CurrentWebsite"]);
+}
+@{using (Html.BeginForm("create", "contact", new { area = "CyberStride.Contacts" }, FormMethod.Post, new { @class = "contact-form" })){
+      @Html.ValidationSummary()
+<fieldset>
+    <legend>@T("Contact Us")</legend>
+    <ol>
+        <li>
+            <label for="Name">@T("Name")</label>
+            <input id="Name" class="text required" name="Name" type="text" value="@(hasContext ? name : String.Empty)" />
+        </li>
+        <li>
+            <label for="Email">@T("Email")</label>
+            <input id="Email" class="text required" name="Email" type="text" value="@(hasContext ? email : String.Empty)"/>
+        </li>
+        <li>
+            <label for="Phone">@T("Phone")</label>
+            <input id="Phone" class="text" name="Phone" type="text" value="@(hasContext ? phone : String.Empty)"/>
+        </li>
+        <li>
+            <label for="CurrentWebsite">@T("Current Website")</label>
+            <input id="CurrentWebsite" class="text" name="CurrentWebsite" type="text" value="@(hasContext ? currentWebsite : String.Empty)"/>
+        </li>
+        <li>
+            <label for="Topic">@T("Topic of Inquiry")</label>
+            <input id="Topic" class="text" name="Topic" type="text" value="@(hasContext ? topic : String.Empty)"/>
+        </li>
+        <li>
+            <label for="Message">@T("Details")</label>
+            <textarea id="Message" class="text" name="Message" cols="50" rows="10">@(hasContext ? message : String.Empty)</textarea>
+        </li>
+     </ol>
+</fieldset>
+    @Html.Hidden("ReturnUrl", Context.Request.ToUrlString())
+    @Html.Hidden("Id", (int)Model.ContentPart.Id)
+    @Html.AntiForgeryTokenOrchard() 
+    <input type="submit" value="@T("Send")" />
+  }
+}

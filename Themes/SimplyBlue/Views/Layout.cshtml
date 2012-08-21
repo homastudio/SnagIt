@@ -1,0 +1,55 @@
+﻿@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : "";}).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+}
+@{
+    Script.Require("ShapesBase");
+    Style.Include("Base.css");
+    Style.Include("http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz");
+    
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+    //Add classes to the wrapper div to toggle tripel widget zones on and off
+    var tripelClass = CalcuClassify(new [] {"TripelFirst", "TripelSecond", "TripelThird"}, "tripel-"); // for tripel-1, triple-2, etc. if any of the tripel zones are filled
+    if (HasText(tripelClass)) {
+        Model.Classes.Add(tripelClass);
+    }
+    
+   Model.Id = "layout-container";
+    var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
+}
+@tag.StartElement
+<div id="layout-container">
+    <div id="layout-navigation">
+        @Display(Model.Navigation)
+    </div>
+    <div id="layout-header">
+        <img src="/Themes/SimplyBlue/Content/Images/header.jpg" alt="David Konatschnig" />
+    </div>
+    <div id="layout-main" class="group">
+        @Display(Model.Content)
+    </div>
+</div>
+@if (Model.TripelFirst != null || Model.TripelSecond != null || Model.TripelThird
+!= null) {
+<div id="layout-tripel" class="group">
+    @if (Model.TripelFirst != null) {
+    <div id="tripel-first">
+        @Zone(Model.TripelFirst)
+    </div>
+    } @if (Model.TripelSecond != null) {
+    <div id="tripel-second">
+        @Zone(Model.TripelSecond)
+    </div>
+    } @if (Model.TripelThird != null) {
+    <div id="tripel-third">
+        @Zone(Model.TripelThird)
+    </div>
+    }
+</div>
+
+}

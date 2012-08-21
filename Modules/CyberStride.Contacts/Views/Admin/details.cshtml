@@ -1,0 +1,15 @@
+﻿@model CyberStride.Contacts.Models.ContactPart
+
+@using Orchard.Mvc.Html;
+@using Orchard.Utility.Extensions;
+
+<h1>@Html.TitleForPage(T("Contact request from {0}",Model.Name))</h1>
+<h5>@T("Contact made at {0}", Model.ContactDateUtc)</h5>
+<ul>
+    <li>Topic: @Model.Topic</li>
+    <li>Email: @Model.Email</li>
+    <li>Company: @Model.Company</li>
+    <li>Phone: @Model.Phone</li>
+    <li>Message: @Model.Message</li>
+</ul>
+@Html.ActionLink("Back to List", "index", new { controller = "admin", area = "CyberStride.Contacts" })

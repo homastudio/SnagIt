@@ -1,0 +1,372 @@
+
+/* Reset
+***************************************************************/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+header, footer, aside, nav, article
+{
+    display: block;
+}
+
+/* Clearing Float
+***************************************************************/
+group:after
+{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.group
+{
+    display: inline-block;
+}
+/* for IE/Mac */
+.metadata
+{
+    display: none;
+}
+/* General
+***************************************************************/
+body
+{
+    font: normal 100% Verdana,Segoe UI,Trebuchet,Arial,Sans-Serif;
+    height: 100%;
+    text-align: left;
+    color: #67747a;
+    background: #ededed;
+}
+
+
+/* Headings */
+h1, h2, h3, h4, h5, h6, legend
+{
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1
+{
+    font-size: 160%;
+    margin-bottom: 4px;
+    border-bottom: 1px dotted;
+    width: 100%;
+    height: 32px;
+    font-family: 'Yanone Kaffeesatz' , sans-serif;
+    color: #67747A;
+    font-weight: bold;
+}
+h2
+{
+    font-size: 130%;
+    width: 100%;
+    margin-bottom: 4px;
+    height: 24px;
+    font-family: 'Yanone Kaffeesatz' , sans-serif;
+    color: #67747A;
+    font-weight: bold;
+}
+
+h3
+{
+    font-size: 130%;
+}
+h4
+{
+    font-size: 120%;
+}
+h5
+{
+    font-size: 105%;
+}
+
+p
+{
+    margin: 0 0 1em;
+    line-height: 1.538em;
+}
+p img.left
+{
+    float: left;
+    margin: 0.923em 0.923em 0.923em 0;
+    padding: 0;
+}
+p img.right
+{
+    float: right;
+    margin: 0.923em 0 0.923em 0.923em;
+}
+
+a:focus, a:hover
+{
+    text-decoration: underline;
+}
+a
+{
+    color: #2EC1EE;
+    text-decoration: none;
+}
+
+#layout-header
+{
+    color: #000;
+    width: 778px;
+    height: 180px;
+    margin-left: 40px;
+    float: left;
+    margin-top: 34px;
+}
+
+#branding h1
+{
+    font-size: 140%;
+    color: #fff;
+    padding: 8px 0 0 40px;
+}
+
+/* Structure
+***************************************************************/
+#layout-navigation
+{
+    margin: 20px 0 0 40px;
+    display: block;
+    height: 180px;
+    float: left;
+}
+
+nav ul
+{
+    padding: 0px;
+    margin: 0px;
+    width: 180px;
+    font-size: 12px;
+}
+nav ul li
+{
+    width: 180px;
+    float: left;
+    border-bottom: 3px solid #2ec1fe;
+    display: block;
+    float: left;
+}
+nav ul li.current
+{
+    color: #2799c9;
+    width: 180px;
+    float: left;
+    border-bottom: 3px solid #2799c9;
+    background: #fff;
+}
+nav ul a, nav ul a:hover
+{
+    padding: 5px 0px 0px 1px;
+    display: block;
+    float: left;
+    color: #2ec1fe;
+    text-decoration: none;
+    line-height: 24px;
+}
+nav ul li.current a, nav ul li.current a:hover
+{
+    padding: 5px 0px 0px 1px;
+    display: block;
+    float: left;
+    color: #2799c9;
+    text-decoration: none;
+    line-height: 24px;
+}
+
+
+/* Container
+***************************************************************/
+#layout-container
+{
+    margin: 0 auto 40px;
+    background: #fff;
+    width: 1080px; /*min-height: 600px;*/
+}
+
+/* Main
+***************************************************************/
+#layout-main
+{
+    color: #67747a;
+    font-size: 12px;
+    width: 780px;
+    margin-left: 260px;
+}
+#layout-left
+{
+    width: 240px;
+    float: left;
+}
+
+#layout-tripel
+{
+    width: 1080px;
+    margin-left: 222px;
+}
+#layout-tripel ul
+{
+    list-style: none;
+}
+#layout-tripel > div
+{
+    float: left;
+    width: 1080px;
+    font-size: 12px;
+}
+
+/*2 zones on */
+.tripel-12 #layout-tripel > div
+{
+    width: 720px;
+}
+/* If zones 1, 2 are on */
+.tripel-23 #layout-tripel > div
+{
+    width: 720px;
+}
+/* If zones 2, 3 are on */
+.tripel-13 #layout-tripel > div
+{
+    width: 720px;
+}
+/* If zones 1, 3 are on */
+
+/*3 zones on */
+.tripel-123 #layout-tripel > div
+{
+    width: 240px;
+    margin: 0 0 0 40px;
+}
+/* If zones 1, 2, 3 are on */
+
+#layout-tripel h1
+{
+    font-size: 16px;
+}
+#tripel-first
+{
+}
+#tripel-second
+{
+}
+#tripel-third
+{
+}
+.zone-zone-tripelfirst
+{
+}
+.zone-zone-tripelsecond
+{
+}
+.zone-zone-tripelthird
+{
+}
+.zone-sub-page-title h1
+{
+    font-size: 22px;
+    padding: 10px 0 3px 0;
+}
+
+.reference img
+{
+    border-left: 10px solid #eefafa;
+}
+.reference-item
+{
+    border: 10px solid #eefafa;
+    margin-right: 20px;
+}
+.reference-item:hover
+{
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+    opacity: 0.7;
+}
+/* Blog
+***************************************************************/
+.blog-posts.content-items h1
+{
+    border: none;
+}
+.blog-posts.content-items li
+{
+    list-style: none;
+}
+.blog-posts .metadata
+{
+    display: block;
+}
+/* Forms
+***************************************************************/
+#add-comment {
+    font-size: 16px;    
+    font-family: 'Yanone Kaffeesatz' , sans-serif;
+}
+.comment-form {
+    font-family: 'Yanone Kaffeesatz' , sans-serif;
+    font-size: 16px;
+}
+.comment-form label
+{
+    font-weight: bold;
+    display: block;
+}
+.comment-form textarea.text-input
+{
+    width: 400px;
+    overflow: hidden;
+}
+#contact-form span
+{
+    float: left;
+}
+.required
+{
+    color: #fb3035;
+    font-weight: bold;
+    float: none !important;
+}
+.comment-form input[type=text]
+{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 2px solid #E7E7E7;
+    color: #58585a;
+    font-family: Arial,Verdana, Tahoma,sans-serif;
+    font-size: 11px;
+    margin: 5px 0 0;
+    padding: 7px 8px;
+    width: 200px;
+}
+.comment-form textarea {
+     border: 2px solid #E7E7E7;
+   
+}
+.comment-form button {
+    border: solid #E7E7E7;
+    height: 30px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+    padding: 4px 14px 4px 14px;
+    float: left;
+    margin-right: 20px;    
+}
+/* Misc
+***************************************************************/

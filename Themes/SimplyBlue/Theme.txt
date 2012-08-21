@@ -1,0 +1,7 @@
+Name: SimplyBlue
+Author: David Konatschnig
+Website: http://www.davidkonatschnig.com
+Description: Simple and minimalistic theme by David Konatschnig
+Version: 1.0
+# todo: provide tags
+# Tags: Classic, Serif

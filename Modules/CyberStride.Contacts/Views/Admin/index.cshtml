@@ -1,0 +1,43 @@
+﻿@model CyberStride.Contacts.ViewModels.ContactRequestListViewModel
+@using CyberStride.Contacts.Models;
+@using CyberStride.Contacts.ViewModels;
+@using Orchard.Mvc.Html;
+@using Orchard.Utility.Extensions;
+@{
+    Style.Require("Admin");
+    Script.Require("ShapesBase");
+}
+<h1>@Html.TitleForPage(T("Manage Contact Requests"))</h1>
+<table class="items" summary="@T("This is a table of the contact requests of your application")">
+    <thead>
+        <tr>
+            <th scope="col">&nbsp;&nbsp;</th>
+            <th scope="col">@T("Contact Date")</th>
+            <th scope="col">@T("Name")</th>
+            <th scope="col">@T("Topic")</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model.ContactRequests)
+        {
+        <tr>
+            <td>@Html.ActionLink("Details", "details", new { controller = "admin", area = "CyberStride.Contacts", id = contact.Id })</td>
+            <td>@Html.DateTime(contact.ContactDateUtc.GetValueOrDefault())</td>
+            <td>@contact.Name</td>
+            <td>@contact.Topic</td>
+            <td>
+                @{using (Html.BeginForm("delete", "admin", new { area = "CyberStride.Contacts" }, FormMethod.Post, new { @class = "delete-form" }))
+                  {
+                      @Html.AntiForgeryTokenOrchard()
+                      @Html.Hidden("id", contact.Id)
+                      @Html.Hidden("returnUrl", Context.Request.ToUrlString())
+                      <input type="submit" value="Delete" />
+                  }
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@Display(Model.Pager)

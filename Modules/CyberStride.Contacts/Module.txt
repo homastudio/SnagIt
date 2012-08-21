@@ -1,0 +1,13 @@
+Name: CyberStride.Contacts
+AntiForgery: enabled
+Author: CyberStride, LLC
+Website: http://cyberstride.net
+Version: 0.9.4
+OrchardVersion: 1.0
+Description: This module allows you to create one or more Contact Pages, alternatively you can assign a ContactForm as a content part or widget to an arbitrary page. In all cases, the posted request will be shown in the admin panel under the Contact Requests menu item, and you may optionally designate an email address to be sent the contact request as well, if you have the Email module configured. 0.9.2 is a minor update to the previous version, improving the output of the email to the admin to include info entered by the user on the form.
+Features:
+    CyberStride.Contacts:
+	    Name: Contact Form
+        Description: Description for feature CyberStride.Contacts.
+		Category: Messaging
+		Dependencies: Orchard.Messaging

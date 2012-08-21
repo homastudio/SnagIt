@@ -1,0 +1,85 @@
+@using Orchard.ContentManagement
+@using Orchard.Utility.Extensions
+@using oforms.Models
+@using oforms.HtmlHelpers
+
+@{
+    ContentItem contentItem = Model.ContentItem;
+    var form = (OFormPart)contentItem.Get(typeof(OFormPart));
+}
+ 
+@helper Captcha()
+    {
+        var random = new Random();
+        var routeValues = new { area = "oforms", c = random.Next() };
+    @Html.Image(Url.Action("GenerateCaptcha", "Home", routeValues), "captcha", null);
+    <br />
+    @Html.TextBox(oforms.OFormGlobals.CaptchaKey, null, new { remote = Url.Action("ValidateCaptcha", "Home", routeValues), @class = "required" });
+    }
+           
+@using (Html.BeginFormAntiForgeryPost(
+                                        String.IsNullOrEmpty(form.Action) ? Url.Action("SubmitForm", "Home", new { area = "oforms" }) : form.Action,
+                                        form.Method == "POST" ? FormMethod.Post : FormMethod.Get,
+                                        new { @id = form.Name, enctype = form.CanUploadFiles ? "multipart/form-data" : null }
+                                    )
+       )
+{
+    @Html.Hidden(oforms.OFormGlobals.NameKey, form.Name)
+    @Html.Hidden("ReturnUrl", Context.Request.RawUrl)
+    if (!string.IsNullOrEmpty(form.InnerHtml))
+    { 
+        @Html.Raw(form.InnerHtml.Replace("{captcha}", Captcha().ToString()))
+    }
+}
+
+@{ /* DO NOT REMOVE THE LINES BELOW, IF YOU LIKE THIS MODULE, SUPPORT IT AND GET A LICENSE!!! http://extendorchard.co.uk/license-oforms */}
+@{ /* if you really can't pay you can use class oforms to hide the below div, the the link should stay, it is illegal to remove it */}
+@if (!Model.ValidSn)
+{@Html.Raw("<div class='oforms'><a href='http://extendorchard.co.uk' target=_blank>Extend Orchard</a></div>")}
+
+@{
+    String validatorCollectorString = new Validator()
+        .ValidationRuleCollector(form.ValRequiredFields, "required")
+        .ValidationRuleCollector(form.ValEmail, "email")
+        .ValidationRuleCollector(form.ValNumbersOnly, "number")
+        .ValidationRuleCollector(form.ValUrl, "url")
+        .ValidationRuleCollector(form.ValDate, "date")
+        .RenderValidator();
+}
+
+
+@{
+    Style.Require("ValidatorCss");
+    Script.Require("jQuery").AtHead();
+    Script.Require("ValidatorAdditional");
+}
+
+@using (Script.Foot())
+{
+    if (!string.IsNullOrEmpty(Model.Culture) && Model.Culture != "en")
+    {
+        Script.Include("validateLocalization/messages_" + Model.Culture + ".js");
+    }        
+    
+    <script type="text/javascript">
+    //<![CDATA[
+	(function($) {
+        $(document).ready(function() {
+            $.ajaxSetup({ async: false });
+            $('#@form.Name').validate({
+                rules: {	                            
+			            @Html.Raw(validatorCollectorString)
+                },
+                onkeyup: false,
+                messages: {
+                    @oforms.OFormGlobals.CaptchaKey: {
+                        remote: 'Incorrect captcha'
+                    }
+                }
+            });
+        });
+	})(jQuery);
+	//]]>
+    </script>
+}
+
